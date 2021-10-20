@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const patientSchema = new Schema({
+const disabledPatientSchema = new Schema({
   codigoCliente: {
     type: Number
   },
@@ -36,10 +36,14 @@ const patientSchema = new Schema({
   pagamentos: {
     type: Schema.Types.ObjectId,
     ref: 'Payment'   
+  },
+  motivoDesativacao: {
+      type: String,
+      required: true
   }
 }, { timestamps: true });
 
 
-const Patient = mongoose.model('Patient', patientSchema);
+const disabledPatient = mongoose.model('disabledPatient', disabledPatientSchema);
 
-module.exports = Patient;
+module.exports = disabledPatient;

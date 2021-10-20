@@ -6,18 +6,18 @@ const appointmentSchema = new Schema({
     type: Date,
     required:	true,
   },
-  horário: {
-    type: Number,
+  horario: {
+    type: String,
     required: true 
-  },
-  profissional: {
-    type: Schema.Types.ObjectId,
-    ref: 'Professional',
-    required: true
   },
   paciente: {
     type: Schema.Types.ObjectId,
     ref: 'Patient',
+    required: true
+  },
+  profissional: {
+    type: Schema.Types.ObjectId,
+    ref: 'Professional',
     required: true
   },
   preAtendimento: {
