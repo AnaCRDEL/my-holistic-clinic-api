@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const patientSchema = new Schema({
-  codigoCliente: {
+  patientCode: {
     type: Number
   },
-  nome: {
+  name: {
     type: String,
     required: true 
   },
-  telefone: {
+  phoneNumber: {
     type: String,
     required: true
   },
-  dataNascimento: {
+  birthDate: {
     type: Date,
     required: true
   },
@@ -21,19 +21,19 @@ const patientSchema = new Schema({
     type: String,
     required: true
   },
-  endereço: {
+  address: {
     type: String,
     required: true
   },
-  atendimentos: {
+  appointments: [{
     type: Schema.Types.ObjectId,
     ref: 'Appointment'
-  },
-  sintomas: {
+  }],
+  symptoms: {
     type: String,
     required: true 
   },
-  pagamentos: {
+  payments: {
     type: Schema.Types.ObjectId,
     ref: 'Payment'   
   }

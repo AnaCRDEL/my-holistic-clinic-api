@@ -14,7 +14,7 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
     const { id } = request.params;
     try {
-        const professional = await Professional.findById(id);
+        const professional = await Professional.findById(id).populate('appointments', 'date time');;
         response.status(200).json(professional);
     } catch (error) {
         response.status(500).json(console.log(error))

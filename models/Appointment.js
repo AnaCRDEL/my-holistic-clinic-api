@@ -2,33 +2,33 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const appointmentSchema = new Schema({
-  data: {
+  date: {
     type: Date,
     required:	true,
   },
-  horario: {
+  time: {
     type: String,
     required: true 
   },
-  paciente: {
+  patient: {
     type: Schema.Types.ObjectId,
     ref: 'Patient',
     required: true
   },
-  profissional: {
+  professional: {
     type: Schema.Types.ObjectId,
     ref: 'Professional',
     required: true
   },
-  preAtendimento: {
+  beforeAppointment: {
     type: String,
     default: '' 
   },
-  posAtendimento: {
+  afterAppointment: {
     type: String,
     default: '' 
   },
-  tratamento: {
+  treatment: {
     type: String,
     default: '' 
   },
