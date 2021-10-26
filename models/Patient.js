@@ -36,6 +36,10 @@ const patientSchema = new Schema({
   payments: {
     type: Schema.Types.ObjectId,
     ref: 'Payment'   
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   }
 }, { timestamps: true });
 
