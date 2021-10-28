@@ -7,6 +7,27 @@ const router = Router();
 router.get('/', async (request, response) => {
     try {
         const appointments = await Appointment.find().populate('patient', 'name').populate('professional', 'name');
+        appointments.sort((a, b) => {
+            const aDate = new Date(a.date.toString().replace('Z', ''))
+            const bDate = new Date(b.date.toString().replace('Z', ''))
+            const aTime = Number(a.time.replace(':', ''))
+            const bTime = Number(b.time.replace(':', ''))
+            if (aDate > bDate) {
+                return 1
+            }
+            if (aDate < bDate) {
+                return -1
+            }
+            if (+aDate === +bDate) {
+                if (aTime > bTime) {
+                    return 1
+                }
+                if (aTime < bTime) {
+                    return -1
+                }
+            }
+            return 0
+        })
         response.status(200).json(appointments);
     } catch (error) {
         response.status(500).json(console.log(error))
