@@ -40,6 +40,9 @@ const patientSchema = new Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+  deactivationReason: {
+    type: String,
   }
 }, { timestamps: true });
 

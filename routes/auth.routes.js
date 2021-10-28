@@ -11,7 +11,7 @@ function validateEmail(email) {
 }
 
 router.post('/signup', async (request, response) => {
-    const { nome, email, password, telefone, especialidades } = request.body;
+    const { name, email, password, phoneNumber, knownTechniques } = request.body;
     try {
         if (!validateEmail(email)) {
         throw new Error('invalid email')
@@ -23,14 +23,14 @@ router.post('/signup', async (request, response) => {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const newProfessional = await Professional.create({
-          nome,
+          name,
           email,
           password: passwordHash,
-          telefone,
-          especialidades
+          phoneNumber,
+          knownTechniques
         });
         response.status(201).json({
-            nome: newProfessional.nome,
+            name: newProfessional.name,
             email: newProfessional.email,
           });
     } catch (error) {
