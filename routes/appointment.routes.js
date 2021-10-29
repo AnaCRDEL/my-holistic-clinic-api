@@ -8,23 +8,13 @@ router.get('/', async (request, response) => {
     try {
         const appointments = await Appointment.find().populate('patient', 'name').populate('professional', 'name');
         appointments.sort((a, b) => {
-            const aDate = new Date(a.date.toString().replace('Z', ''))
-            const bDate = new Date(b.date.toString().replace('Z', ''))
-            const aTime = Number(a.time.replace(':', ''))
-            const bTime = Number(b.time.replace(':', ''))
+            const aDate = new Date(a.dateTime)
+            const bDate = new Date(b.dateTime)
             if (aDate > bDate) {
                 return 1
             }
             if (aDate < bDate) {
                 return -1
-            }
-            if (+aDate === +bDate) {
-                if (aTime > bTime) {
-                    return 1
-                }
-                if (aTime < bTime) {
-                    return -1
-                }
             }
             return 0
         })
@@ -57,6 +47,12 @@ router.post('/', async (request, response) => {
 
 router.put('/:id', async (request, response) => {
     const { id } = request.params;
+    for (const prop in request.body) {
+        if( request.body[prop] === '' || request.body[prop] === null) {
+          response.status(500).json({ message: 'ServerError'});
+          return
+        } 
+    }
     try {
         const updatedAppointment = await Appointment.findByIdAndUpdate(id, request.body, { new: true });
         response.status(200).json(updatedAppointment);
