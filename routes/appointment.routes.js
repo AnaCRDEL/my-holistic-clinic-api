@@ -48,10 +48,12 @@ router.post('/', async (request, response) => {
 router.put('/:id', async (request, response) => {
     const { id } = request.params;
     for (const prop in request.body) {
-        if( request.body[prop] === '' || request.body[prop] === null) {
-          response.status(500).json({ message: 'ServerError'});
-          return
-        } 
+        if (prop === 'dateTime' || prop === 'patient' || prop === 'professional') {
+            if( request.body[prop] === '' || request.body[prop] === null) {
+                response.status(500).json({ message: 'ServerError'});
+                return
+            }     
+        }
     }
     try {
         const updatedAppointment = await Appointment.findByIdAndUpdate(id, request.body, { new: true });

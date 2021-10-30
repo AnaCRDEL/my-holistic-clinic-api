@@ -44,10 +44,12 @@ router.post('/', async (request, response) => {
 router.put('/:id', async (request, response) => {
     const { id } = request.params;
     for (const prop in request.body) {
-        if( request.body[prop] === '' || request.body[prop] === null) {
-          response.status(500).json({ message: 'ServerError'});
-          return
-        } 
+        if (prop != 'deactivationReason') {
+            if( request.body[prop] === '' || request.body[prop] === null) {
+                response.status(500).json({ message: 'ServerError'});
+                return
+            }     
+        }
     }
     try {
         const updatedPatient = await Patient.findByIdAndUpdate(id, request.body, { new: true });
