@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
     cors({
       credentials: true,
-      origin: ['https://myholisticclinic.herokuapp.com/']
+      origin: ['https://myholisticclinic.herokuapp.com']
     })
 );
 
