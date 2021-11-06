@@ -63,6 +63,7 @@ http://localhost:<PORT>
 | POST | /appointments | { dateTime², patient², professional², beforeAppointment, afterAppointment, treatment } | { newAppointment } | Creates a new appointment |
 | PUT | /appointments/:id | { appointment } | { updatedAppointment } | Updates a appointment |
 | DELETE | /appointments/:id | - | { message } | Deletes a appointment |
+#
 ¹: all endpoints except the ones starting with `/auth` need to use a token (bearer) authorization header.
 ²: required field.
 
